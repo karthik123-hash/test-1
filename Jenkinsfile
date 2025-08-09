@@ -9,7 +9,7 @@ pipeline{
     stages{
         stage('Git checkout') {
             steps {
-                    git branch: 'main', url: 'https://github.com/ManojKRISHNAPPA/test-1.git'
+                    git branch: 'main', url: 'https://github.com/karthik123-hash/test-1.git'
             }
         }
         stage('Compile') {
@@ -24,13 +24,13 @@ pipeline{
         }
         stage('Build Docker Image') {
             steps {
-                    sh 'docker build -t manojkrishnappa/project:1 .'
+                    sh 'docker build -t karthikputhran/project:1 .'
             }
         }
 
         stage('Docker image scan'){
             steps {
-                    sh 'trivy image --format table -o trivy-image-report.html manojkrishnappa/project:1'
+                    sh 'trivy image --format table -o trivy-image-report.html karthikputhran/project:1'
             }
         }
         stage('Containersation'){
@@ -38,7 +38,7 @@ pipeline{
                     sh '''
                     docker stop c1 || true
                     docker rm c1 || true
-                    docker run -it -d --name c1 -p 9000:8080 manojkrishnappa/project:1
+                    docker run -it -d --name c1 -p 9000:8080 karthikputhran/project:1
                     '''
             }
         }
@@ -54,7 +54,7 @@ pipeline{
 
         stage('Push Docker Image to Docker Hub') {
             steps {
-                sh 'docker push manojkrishnappa/project:1'
+                sh 'docker push karthikputhran/project:1'
             }
             
         }
